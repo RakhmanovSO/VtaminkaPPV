@@ -26,7 +26,7 @@ class MainController extends BaseController {
 
         }//try
         catch( \PDOException $ex ){
-            die( "DATABASE CONNECTION ERROR! {$ex->getMessage()}" );
+            die( "DATABASE CONNECTgit config [--global] user.name \"Full Name\"ION ERROR! {$ex->getMessage()}" );
         }//catch
 
         $controllerClass = "controllers\\{$controller}Controller";
