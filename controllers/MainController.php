@@ -15,6 +15,19 @@ class MainController extends BaseController {
     public function start(  ){
 
         $controller = $this->request->getGetValue('ctrl');
+
+
+
+
+
+
+
+
+
+
+
+
+
         $action = $this->request->getGetValue('act');
 
         try{
