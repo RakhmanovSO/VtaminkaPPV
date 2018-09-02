@@ -23,6 +23,7 @@ class MainController extends BaseController {
                 'vtamin2',
                 '123456'
             );
+
         }//try
         catch( \PDOException $ex ){
             die( "DATABASE CONNECTION ERROR! {$ex->getMessage()}" );
