@@ -1,0 +1,23 @@
+http://localhost:5000/VtaminkaPPV/?ctrl=Home&act=index
+
+https://github.com/ovsyanikov94/VtaminkaPPV
+
+https://www.youtube.com/channel/UC7f5bVxWsm3jlZIPDzOMcAg/playlists
+
+
+
+
+
+
+
+
+
+
+
+
+
+git init
+git add your_file
+git commit -m "first commit"
+git remote add origin https://github.com/RakhmanovSO/VtaminkaPPV
+git push -u origin master
