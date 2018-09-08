@@ -24,4 +24,33 @@ class Product{
 
     }//getProductsList
 
+
+
+    public static function AddProduct( $productTitle,  $productDescription, $productPrice ) {
+
+        $stm = MySQL::$db->prepare("INSERT INTO products(productID , productTitle, productDescription, productPrice) VALUES (NULL ,:title , :description , :price )");
+
+        $stm->bindParam(':title', $productTitle, \PDO::PARAM_STR);
+
+
+        $stm->bindParam(':description', $productDescription, \PDO::PARAM_STR);
+
+
+        $stm->bindParam(':price', $productPrice, \PDO::PARAM_STR);
+
+
+
+
+        $result = $stm->execute();
+
+        if( $result === false ){
+            throw new \Exception('Ошибка добавления Продукта! Возможно такой Продукт уже есть!');
+        }//if
+
+        return  $result;
+
+    }//AddProduct
+
+
+
 }//Product

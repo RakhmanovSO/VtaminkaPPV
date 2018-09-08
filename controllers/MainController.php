@@ -15,19 +15,17 @@ class MainController extends BaseController {
     public function start(  ){
 
         $controller = $this->request->getGetValue('ctrl');
-
         $action = $this->request->getGetValue('act');
 
         try{
             MySQL::$db = new \PDO(
                 "mysql:host=localhost;dbname=vtaminka;charset=utf8",
-                'vtamin2',
+                'vtamin',
                 '123456'
             );
-
         }//try
         catch( \PDOException $ex ){
-            die( "DATABASE CONNECTgit config [--global] user.name \"Full Name\"ION ERROR! {$ex->getMessage()}" );
+            die( "DATABASE CONNECTION ERROR! {$ex->getMessage()}" );
         }//catch
 
         $controllerClass = "controllers\\{$controller}Controller";

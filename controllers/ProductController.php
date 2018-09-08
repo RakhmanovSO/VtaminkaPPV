@@ -60,6 +60,7 @@ class ProductController extends BaseController {
             $response['data'] = $result;
 
         }//try
+
         catch( \Exception $ex ){
 
             $response['code'] = 400;
@@ -73,5 +74,46 @@ class ProductController extends BaseController {
         $this->json( $response );
 
     }//addNewAttributeAction
+
+
+    public function addNewProductAction(  ){
+
+        $productTitle = $this->request->getPostValue('productTitle');
+
+        $productDescription = $this->request->getPostValue('productDescription');
+
+        $productPrice = $this->request->getPostValue('productPrice');
+
+
+        $response = array(
+            'code' => '' , 'data' => '' , 'message' => ''
+        );
+
+        try{
+            $result = Product::AddProduct( $productTitle, $productDescription , $productPrice);
+
+            $response['code'] = 200;
+            $response['message'] = 'Продукт добавлен!';
+            $response['data'] = $result;
+
+        }//try
+        catch( \Exception $ex ){
+
+            $response['code'] = 400;
+            $response['message'] = $ex->getMessage();
+            $response['data'] = array(
+                'productTitle' => $productTitle,
+                'productDescription' => $productDescription,
+                'productPrice' => $productPrice
+
+            );
+
+        }//catch
+
+        $this->json( $response );
+
+    }//addNewProductAction
+
+
 
 }//ProductController

@@ -4,13 +4,19 @@
 
     <form>
         <div class="form-group">
-            <label for="productTitle">Нозвание товара</label>
+            <label for="productTitle">Название товара</label>
             <input class="form-control" id="productTitle" placeholder="Введите название">
         </div>
+
+        <div id="errorMessage1" style="display: none" class="alert alert-danger">Ошибка! Проверьте введенные данные! </div>
+
         <div class="form-group">
             <label for="productPrice">Цена товара</label>
             <input class="form-control" id="productPrice" placeholder="Введите цену">
         </div>
+
+        <div id="errorMessage2" style="display: none" class="alert alert-danger">Разрешены только цифры от 0 до 9.</div>
+
         <div class="form-group">
             <label for="productCategories">Категории</label>
             <select class="form-control" id="productCategories" multiple >
@@ -37,7 +43,7 @@
             <input class="form-control" id="attributeValue" placeholder="Введите значение">
         </div>
         <div class="form-group">
-            <DIV id="addAttributeToProduct" class="btn btn-primary">Добавить атрибут</DIV>
+            <div id="addAttributeToProduct" class="btn btn-primary">Добавить атрибут</div>
         </div>
         <div class="form-group">
             <label for="productPrice">Список установленных атрибутов</label>
@@ -62,5 +68,9 @@
 
             </textarea>
         </div>
-        <DIV class="btn btn-primary">Добавить товар</DIV>
+
+        <div id="errorMessage3" style="display: none" class="alert alert-danger">Ошибка! Проверьте введенные данные!</div>
+
+        <div id ="addProduct" class="btn btn-primary">Добавить товар</div>
+
     </form>

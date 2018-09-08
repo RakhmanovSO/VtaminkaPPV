@@ -39,9 +39,9 @@
 
         } );
 
-    }//if
+    }//if addAttributeButton
 
-    //Добавление товара
+
     let attributes = [];
 
     let attributesTable = document.querySelector('#attributesTable');
@@ -73,6 +73,8 @@
 
     } );
 
+
+
     if(addAttributeToProductButton){
 
         addAttributeToProductButton.addEventListener('click' , function (  ){
@@ -98,5 +100,70 @@
         } );
 
     }//if
+
+
+    //Добавление товара
+
+    let addProductButton = document.querySelector('#addProduct');
+
+
+    if(addProductButton){
+
+        addProductButton.addEventListener('click' , async function (  ){
+
+            let productTitle = document.querySelector('#productTitle').value;
+
+            if(!productTitle.match(/^[a-zа-я0-9_\s]{2,50}$/i)){
+
+                $('#errorMessage1').fadeIn( 100 ).delay(1500).fadeOut(100);
+                return;
+
+            }//if
+
+
+            let productPrice = document.querySelector('#productPrice').value;
+
+            if(!productPrice.match(/^[0-9.,]{2,20}$/i)){
+
+                $('#errorMessage2').fadeIn( 100 ).delay(1500).fadeOut(100);
+                return;
+
+            }//if
+
+
+            let productDescription = document.querySelector('#productDescription').value;
+
+            if(!productDescription.match(/^[a-zа-я0-9_\s]{2,499}$/i)){
+
+                $('#errorMessage3').fadeIn( 100 ).delay(1500).fadeOut(100);
+                return;
+            }//if
+
+
+            $.post(`${window.ServerAddress}?act=addNewProduct&ctrl=Product`,{'productTitle': productTitle, 'productPrice': productPrice, 'productDescription': productDescription,} , function ( response ){
+                console.log( 'response' , response );
+
+                if(response.code === 200){
+                    $('#errorMessage').fadeOut(100);
+                    $('#successMessage').fadeIn( 100 ).delay(2500).fadeOut(100);
+                }//else
+                else{
+
+                    $('#successMessage').fadeOut(100);
+                    $('#errorMessage').text(response.message);
+
+                    $('#errorMessage').fadeIn( 100 ).delay(2500).fadeOut(100);
+
+                }//else
+
+            } );
+
+        } );
+
+
+
+    } // if  addProductButton
+
+
 
 } )();
