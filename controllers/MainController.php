@@ -20,8 +20,8 @@ class MainController extends BaseController {
         try{
             MySQL::$db = new \PDO(
                 "mysql:host=localhost;dbname=vtaminka;charset=utf8",
-                'vtamin',
-                '123456'
+                'root',
+                ''
             );
         }//try
         catch( \PDOException $ex ){

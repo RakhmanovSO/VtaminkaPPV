@@ -89,5 +89,51 @@
     }//if
 
     //Обновление категории
+    let updateCategoryButton = document.querySelector('#updateCategory');
+
+    if(updateCategoryButton){
+
+        updateCategoryButton.addEventListener('click' , ()=>{
+
+            let titleInput = document.querySelector('#categoryTitle');
+
+            let title = titleInput.value.trim();
+            let categoryID = +titleInput.dataset.categoryId;
+
+            if( !title.match(/^[a-z0-9\sа-я]{2,50}$/i) ){
+
+                $('#successMessage').fadeOut(100);
+                $('#errorMessage').fadeIn( 100 ).delay(2500).fadeOut(100);
+                return;
+
+            }//if
+
+            $.ajax( `${window.ServerAddress}?ctrl=Category&act=saveCategory`, {
+                method: 'post',
+                data: {
+                    'categoryID': categoryID,
+                    'categoryTitle':title
+                },
+                success: ( response )=>{
+
+                    console.log('RESPONSE' , response);
+
+                    if(response.code === 200){
+                        $('#errorMessage').fadeOut(100);
+                        $('#successMessage').fadeIn( 100 ).delay(2500).fadeOut(100);
+                    }//else
+                    else{
+
+                        $('#successMessage').fadeOut(100);
+                        $('#errorMessage').text(response.message);
+
+                        $('#errorMessage').fadeIn( 100 ).delay(2500).fadeOut(100);
+
+                    }//else
+
+                }//success
+            } );
+        });
+    }//if
 
 } )();

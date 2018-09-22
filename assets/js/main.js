@@ -1,6 +1,7 @@
 "use strict";
 
-(function (  ){
+(function (  )
+{
 
     let host = 'http://localhost';
     let port = '5012';

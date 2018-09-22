@@ -4,6 +4,7 @@
 
     let addAttributeButton = document.querySelector('#addAttribute');
 
+
     if(addAttributeButton){
 
         addAttributeButton.addEventListener('click' , async function (  ){
@@ -101,7 +102,6 @@
 
     }//if
 
-
     //Добавление товара
 
     let addProductButton = document.querySelector('#addProduct');
@@ -139,8 +139,18 @@
                 return;
             }//if
 
+            let options = document.querySelectorAll("#productCategories option");
+            let selectedOptions = [].filter.call(options , o => o.selected === true);
 
-            $.post(`${window.ServerAddress}?act=addNewProduct&ctrl=Product`,{'productTitle': productTitle, 'productPrice': productPrice, 'productDescription': productDescription,} , function ( response ){
+            let categoriesIds = [].map.call( selectedOptions , o => o.value );
+
+            $.post(`${window.ServerAddress}?act=addNewProduct&ctrl=Product`,{
+                'productTitle': productTitle,
+                'productPrice': productPrice,
+                'productDescription': productDescription,
+                'attributes': JSON.stringify(attributes),
+                'categories': JSON.stringify(categoriesIds),
+            } , function ( response ){
                 console.log( 'response' , response );
 
                 if(response.code === 200){

@@ -67,5 +67,69 @@ class Category{
 
 
     }
+
+    public static function getCategoryById( $categoryID ) {
+
+        $stm = MySQL::$db->prepare("SELECT * FROM categories WHERE categoryID = :id");
+        $stm->bindParam( ":id" , $categoryID , \PDO::PARAM_INT);
+
+        $stm->execute();
+
+        $category = $stm->fetch(\PDO::FETCH_OBJ);
+
+        return $category;
+
+    }//getCategoryById
+
+
+    public static function GetCategoryAndProducts( $categoryID ,  $limit = 10 , $offset = 0){
+
+        $stm = MySQL::$db->prepare("
+                    SELECT p.productID , p.productTitle , p.productPrice 
+                    FROM `productandcategories` as `pc` 
+                    INNER JOIN `products` as `p` 
+                      ON `p`.productID = `pc`.productID 
+                    WHERE pc.`categoryID` = :id LIMIT $offset,$limit");
+
+        $stm->bindParam(':id' , $categoryID , \PDO::PARAM_INT);
+
+        $stm->execute();
+
+        $categoriesandproducts = $stm->fetchAll(\PDO::FETCH_OBJ);
+
+        return $categoriesandproducts;
+
+    }//GetCategoryAndProducts
+
+    public static function GetProductsAmountByCategory(  $categoryID ){
+
+        $stm = MySQL::$db->prepare("SELECT COUNT(pc.productID) as `count` FROM `productandcategories` as pc WHERE pc.categoryID = :id");
+
+        $stm->bindParam(':id' , $categoryID , \PDO::PARAM_INT);
+
+        $stm->execute();
+
+        $count = $stm->fetch(\PDO::FETCH_OBJ);
+
+        return $count->count;
+
+
+    }//GetProductsAmountByCategory
+
+    public static function updateCategory( $categoryID , $categoryTitle ) {
+
+        $stm = MySQL::$db->prepare("UPDATE `categories` SET `categoryTitle`= :title WHERE `categoryID` = :id");
+        $stm->bindParam( ":id" , $categoryID , \PDO::PARAM_INT);
+        $stm->bindParam( ":title" , $categoryTitle , \PDO::PARAM_STR);
+
+        $result = $stm->execute();
+
+        if( $result === false ){
+            throw new \Exception('Ошибка при обновлении категории!');
+        }//if
+
+        return  $result;
+
+    }//getCategoryById
 }
 

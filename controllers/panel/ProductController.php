@@ -6,11 +6,14 @@
  * Time: 11:38
  */
 
-namespace controllers;
+namespace controllers\panel;
 
 use models\Category;
 use models\Product;
+use models\ProductAndAttributes;
+use models\ProductAndCategory;
 use models\ProductAttribute;
+use utils\MySQL;
 
 class ProductController extends BaseController {
 
@@ -60,6 +63,7 @@ class ProductController extends BaseController {
             $response['data'] = $result;
 
         }//try
+
         catch( \Exception $ex ){
 
             $response['code'] = 400;
@@ -73,5 +77,66 @@ class ProductController extends BaseController {
         $this->json( $response );
 
     }//addNewAttributeAction
+
+
+    public function addNewProductAction(  ){
+
+        $productTitle = $this->request->getPostValue('productTitle');
+
+        $productDescription = $this->request->getPostValue('productDescription');
+
+        $productPrice = $this->request->getPostValue('productPrice');
+
+        $attributes = json_decode(  $_POST['attributes'] );
+
+
+        $categories = json_decode(  $_POST['categories'] );
+
+
+        $response = array(
+            'code' => '' , 'data' => '' , 'message' => ''
+        );
+
+        try{
+            $result = Product::AddProduct( $productTitle, $productDescription , $productPrice);
+            $productID = MySQL::$db->lastInsertId();
+
+            foreach ( $attributes as $attribute ){
+
+                ProductAndAttributes::AddAttributeToProduct($productID , $attribute->attributeID , $attribute->attributeValue );
+
+            }//foreach
+
+
+            foreach ( $categories as $category ){
+
+                ProductAndCategory::AddCategoryToProduct($productID , $category );
+
+            }//foreach
+
+
+            $response['code'] = 200;
+            $response['message'] = 'Продукт добавлен!';
+            $response['data'] = $result;
+
+        }//try
+        catch( \Exception $ex ){
+
+            $response['code'] = 400;
+            $response['message'] = $ex->getMessage();
+            $response['data'] = array(
+                'productTitle' => $productTitle,
+                'productDescription' => $productDescription,
+                'productPrice' => $productPrice
+
+            );
+
+        }//catch
+
+        $this->json( $response );
+
+    }//addNewProductAction
+
+
 
 }//ProductController

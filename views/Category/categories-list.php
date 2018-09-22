@@ -13,9 +13,9 @@
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Title</th>
-                        <th>Remove</th>
-                        <th>Update</th>
+                        <th>Название</th>
+                        <th>Удаление</th>
+                        <th>Товаров</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,8 +25,7 @@
                                 <td><?= $category->categoryID ?></td>
                                 <td><?= $category->categoryTitle ?></td>
                                 <td><button data-category-id="<?= $category->categoryID ?>" class="btn btn-danger" >Remove</button></td>
-                                <td><a class="btn btn-primary" href="?ctrl=Category&act=update">Update</a></td>
-
+                                <td><a class="btn btn-primary" href="?ctrl=Category&act=categoryAndProducts&categoryID=<?= $category->categoryID ?>"><?= $category->count ?></a></td>
                             </tr>
                         <?php }//foreach ?>
 

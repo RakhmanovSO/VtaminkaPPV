@@ -1,6 +1,6 @@
 <?php
 
-use controllers\MainController;
+use controllers\panel\MainController;
 
 function LoadClass( $class ){
 
