@@ -51,6 +51,34 @@ class Product{
 
     }//AddProduct
 
+    public static function getProductById( $productID ) {
 
+        $stm = MySQL::$db->prepare("SELECT * FROM products WHERE productID = :id");
+        $stm->bindParam( ":id" , $productID , \PDO::PARAM_INT);
+
+        $stm->execute();
+
+        $products = $stm->fetch(\PDO::FETCH_OBJ);
+
+        return $products;
+
+    }//getProductById
+
+    public static function GetAllProducts( $productID ,  $limit = 10 , $offset = 0){
+
+        $stm = MySQL::$db->prepare("
+                    SELECT p.productID , p.productTitle , p.productPrice 
+                    FROM `products` as `pc`  
+                    WHERE pc.`productID` = :id LIMIT $offset,$limit");
+
+        $stm->bindParam(':id' , $productID , \PDO::PARAM_INT);
+
+        $stm->execute();
+
+        $products = $stm->fetchAll(\PDO::FETCH_OBJ);
+
+        return $products;
+
+    }//GetAllProducts
 
 }//Product

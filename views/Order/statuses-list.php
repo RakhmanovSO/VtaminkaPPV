@@ -28,11 +28,11 @@
             </thead>
             <tbody>
             <?php foreach ( $this->view->statuses as $status ) { ?>
-                <tr data-category-id="<?= $status->statusID ?>">
+                <tr data-status-id="<?= $status->statusID ?>">
 
                     <td><?= $status->statusID  ?></td>
                     <td><?= $status->statusTitle ?></td>
-                    <td><button data-category-id="<?=  $status->statusID  ?>" class="btn btn-danger" >Remove</button></td>
+                    <td><button data-status-id="<?=  $status->statusID  ?>" class="btn btn-danger" >Remove</button></td>
                     <td><a class="btn btn-primary" href="?ctrl=Order&act=categoryAndProducts&categoryID=<?= $status->statusID ?>">0</a></td>
                 </tr>
             <?php }//foreach ?>

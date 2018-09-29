@@ -1,0 +1,22 @@
+{
+  "name": "vtaminkappv",
+  "version": "1.0.0",
+  "description": "run \"bower i\"\r open index.php",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ovsyanikov94/VtaminkaPPV.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ovsyanikov94/VtaminkaPPV/issues"
+  },
+  "homepage": "https://github.com/ovsyanikov94/VtaminkaPPV#readme",
+  "dependencies": {
+    "leaflet": "^1.3.4"
+  }
+}

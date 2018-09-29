@@ -137,6 +137,16 @@ class ProductController extends BaseController {
 
     }//addNewProductAction
 
+    public function allProductsAction(  ){
 
+        $productID = $this->request->getGetValue( 'productID' );
+
+        $this->view->products = Product::getProductById(  $productID );
+
+        $this->view->products = Product::GetAllProducts($productID , 10,0);
+
+        return 'allProducts';
+
+    }//allProductsAction
 
 }//ProductController

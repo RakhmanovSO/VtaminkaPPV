@@ -35,8 +35,7 @@ class OrderStatus{
 
         $stm = MySQL::$db->prepare("
             SELECT * FROM orderstatuses
-            LIMIT $limit,$offset
-        ");
+            LIMIT $offset, $limit ");
 
         $stm->execute();
 

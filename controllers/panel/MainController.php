@@ -34,6 +34,8 @@ class MainController extends BaseController {
 
         $controllerClass = "controllers\\panel\\{$controller}Controller";
 
+        $isApi = false;
+
         if(class_exists($controllerClass)){
             $controllerInstance = new $controllerClass();
         }//if
@@ -41,6 +43,7 @@ class MainController extends BaseController {
             $apiController = "controllers\\api\\{$controller}Controller";
             $controllerInstance = new $apiController();
             $controllerClass = "controllers\\api\\{$controller}Controller";
+            $isApi = true;
         }//else if
         else{
             $controller = "Home";
@@ -62,6 +65,10 @@ class MainController extends BaseController {
 
         $this->view = $controllerInstance->view;
 
+
+        if($isApi){
+            exit();
+        }//if
 
         include_once "views/Default/header.php";
 
